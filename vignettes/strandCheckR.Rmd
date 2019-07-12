@@ -18,44 +18,47 @@ vignette: >
 
 # Introduction
 
-*strandCheckR* is a package used a window that slides across a bam file and
-gets the count/coverage of reads mapping to +/- strand in each window.
-The returned Data Frame gives information across the whole genome through each
-sliding window. That helps to quantify the amount of reads coming from 
-double strand genomic DNA. It can be applied to detect DNA contamination within 
-a strand specifc RNA-seq by assessing whether each window contains reads mainly 
-from one strand, as would be expected from RNA molecules, or from both strands 
-as would be expected from contaminating DNA. Hence, it is considered as an
-additional quality checking for strand specific RNA data.
+*strandCheckR* is a package which uses a sliding window across a bam file and
+returns the count/coverage of reads mapping to +/- strand in each window.
+The returned DataFrame gives information across the whole genome through each
+sliding window which clearly quantifies the strandedness of reads. 
+The approach can be applied to detect possible DNA contamination within a 
+strand specific RNA-seq experiment by assessing whether each window contains 
+reads mainly from one strand, as would be expected from RNA molecules, or from 
+both strands, as would be expected from contaminating DNA. 
+This information can be used as an additional quality checking step for 
+strand-specific RNA-Seq data.
 The package can also be used to detect regions with specific behavior (e.g. 
-highest number of reads) through the whole genome and not only feature regions.
+highest number of reads) through the whole genome or within feature regions.
 
-The window read count function is designed flexibly so that user can filter
-low mapping quality reads, set read proportion to overlap a window, set window 
-length & step etc. It was also implemented in an efficient way to manange big
-bam file. For a typical human RNA-seq bam file, it takes about 3 minutes to 
-scan and get strand information using a standard laptop 2,3 GHz i5 16 GB.
+The main function `getStrandFromBamFile()` is designed flexibly so that users 
+can filter low mapping quality reads, set read proportion which overlap a 
+window, set window length & step etc. 
+It was also implemented in an efficient way to manange large bam files. 
+For a typical human RNA-seq bam file, it takes about 3 minutes to scan and get 
+strand information using a standard laptop (2.3 GHz i5 CPU, 16 GB RAM).
 
-A function to filter out reads coming from double strand DNA is also provided.
+A function to filter out reads coming from double stranded DNA is also provided.
 For each sliding window, it considers the proportion of +/- stranded reads 
 comparing to a given threshold, to decide if a window contains reads derived 
-from single strand RNA or double stranded DNA.
-A read that does not belong to any window coming from RNA will be removed. A
-read that belongs to some windows coming from RNA will be kept with a 
-probability caluclated based on the proportion of +/- stranded of those windows.
+from RNA moluecules (i.e. single-stranded) or double stranded genomic DNA.
+Any read which belongs to any window not decided as being derived from RNA 
+will be removed. 
+Read that belong to some windows coming from RNA will be kept with aprobability
+calculated based on the proportion of +/- stranded reads from these windows.
 
-# Get windows information
+# Get Sliding Window Strand Information
 
-The function *getStrandFromBamFile* is used to get the number of +/- stranded 
+The function `getStrandFromBamFile()` is used to get the number of +/- stranded 
 reads from all sliding windows throughout a list of bam files.
 The bam files should be sorted and have their index files located at the same 
 path as well.
 
 
-```{r getWin, message=FALSE,warning=FALSE}
+```{r getWin, message=FALSE, warning=FALSE}
 library(strandCheckR)
 files <- system.file(
-    "extdata",c("s1.sorted.bam","s2.sorted.bam"),package = "strandCheckR"
+    "extdata", c("s1.sorted.bam", "s2.sorted.bam"), package = "strandCheckR"
     )
 win <- getStrandFromBamFile(files, sequences = "10")
 # shorten the file name
@@ -73,35 +76,38 @@ file name (*File*). Windows that do not overlap with any read are not reported.
 
 The windows with highest read counts, for example, can be obtained as follows.
 
-```{r highestCoverage, eval=TRUE, message=FALSE,warning=FALSE}
-head(win[order((win$NbPos+win$NbNeg),decreasing=TRUE),])
+```{r highestCoverage, eval=TRUE, message=FALSE, warning=FALSE}
+o <- order((win$NbPos+win$NbNeg), decreasing=TRUE)
+win[head(o), ]
 ```
 
 Here is an example for paired end bam file.
 
-```{r paired end, eval=TRUE,message=FALSE,warning=FALSE}
-fileP <- system.file("extdata","paired.bam",package = "strandCheckR")
+```{r paired end, eval=TRUE, message=FALSE, warning=FALSE}
+fileP <- system.file("extdata", "paired.bam", package = "strandCheckR")
 winP <- getStrandFromBamFile(fileP, sequences = "10")
 winP$File <- basename(as.character(winP$File)) #shorten file name
 winP
 ```
 
-# Intersect with an annotation GRanges object
+# Compare to a GRanges Object Defining Features
 
-If you have an annotation data, you can integrate it with the sliding windows 
-obtained from the previous step using the function *intersectWithFeature*. The 
-annotation must be a GRanges object, with or without *mcols*. Make sure that 
-the sequence names in windows and annotation data are consistent.
+If you have annotation data, you can integrate it with the sliding windows 
+obtained from the previous step using the function `intersectWithFeature()`.
+The annotation must be a GRanges object, and can be provided with or without 
+any *mcols*. 
+Make sure that sequence names in returned windows and the annotation data are 
+consistent.
 By default, you will have an additional column in the returned windows which 
-indicates wheather a window overlap with any feature in the annotation object. 
-You can also get details of the overlapped features in the *mcols* of the 
+indicates whether a window overlaps any feature in the annotation object. 
+You can also obtain details of the overlapped features in the *mcols* of the 
 annotation object by specifying it in the *mcolsAnnnot* parameter.
 
-```{r intersect, eval=TRUE, warning=FALSE,message=FALSE}
+```{r intersect, eval=TRUE, warning=FALSE, message=FALSE}
 library(TxDb.Hsapiens.UCSC.hg38.knownGene)
 annot <- transcripts(TxDb.Hsapiens.UCSC.hg38.knownGene)
 #add chr before the sequence names to be consistent with the annot data
-win$Seq <- paste0("chr",win$Seq) 
+win$Seq <- paste0("chr", win$Seq) 
 win <- intersectWithFeature(
     windows = win, annotation = annot, overlapCol = "OverlapTranscript"
     )
@@ -109,93 +115,98 @@ win
 ```
 
 
-If you have a *gtf* or *gff* file, you can use the function *gffReadGR* of the 
-*ballgown* package to read it as a GRanges object.
+If you have a *gtf* or *gff* file, these can be imported using one of the 
+multiple import functions provided by other Bioconductor packages.
 
-# Plot histogram and windows information
+# Plotting Histogram and Window Information
 
-With these windows, you can have some plots via *plotHist* and *plotWin* 
-functions which can be saved to an appropriate location.
+With the obtained windows, you can have generate plots via `plotHist()` and 
+`plotWin()`
 
-To plot the histogram of positive proportion of the sliding windows, we use
-the function *plotHist*. This function will first calculates the frequency of 
-positive proportion over all windows, and also group/normalize them based on 
-given column names. Then it uses the *geom_bar* function of *ggplot2* to plot
-those frequencies. The plot gives you an idea on how much double-strand DNA is 
-contained in your sample. In perfectly clear ss-RNA-seq, the positive 
-proportion of every window should be either around 0\% or 100\%. 
-The more amount of windows have this proportion around 50\%, the more the 
-sample was contaminated by DNA. 
+To plot the distribution of windows based on the proportion of reads aligning 
+to the + strand (i.e. positive proportion), we can use the function 
+`plotHist()`. 
+This function will first calculate the frequency of + strand proportions over 
+all windows, and also group/normalize them based on given column names. 
+It then uses the *geom_bar* function from *ggplot2* to plot these frequencies. 
+These plots are able indicate how much double-strand DNA is contained in each 
+bam file. 
+In perfectly clean ss-RNA-seq, the positive proportion of every window should 
+be near 0\% or 100\%. 
+The more amount of windows with proportions around 50\%, the more the 
+sample was likely contaminated by DNA or some other material. 
 
-```{r plotHist, eval=TRUE, message=FALSE,warning=FALSE}
+```{r plotHist, eval=TRUE, message=FALSE, warning=FALSE}
 plotHist(
-    windows = win, groupBy = c("File","OverlapTranscript"), 
+    windows = win, groupBy = c("File", "OverlapTranscript"), 
     normalizeBy = "File", scales = "free_y"
     )
 ```
 
 In this example, file *s2.sorted.bam* seems to be contaminated with double 
-strand DNA, while file *s1.sorted.bam* is cleaner. By default, the windows are 
-splitted in to 4 coverage groups *<10*, *10-100*, *100-1000*, and *>1000*.
-It can be set via option *split*.
+strand DNA, while file *s1.sorted.bam* is cleaner. 
+By default, the windows are split into 4 coverage groups *<10*, *10-100*, 
+*100-1000*, and *>1000*.
+This can be modified via the argument *split*.
 
-For paired-end data, we can group the Data Frame by read type:
+For paired-end data, we can group the DataFrame by read type:
 
-```{r plotHistPaired, eval=TRUE,message=FALSE,warning=FALSE}
+```{r plotHistPaired, eval=TRUE, message=FALSE, warning=FALSE}
 plotHist(
     windows = winP, groupBy = "Type", normalizeBy = "Type", scales = "free_y"
     )
 ```
 
-Heatmap can be used instead of classic barplot for histogram when specifying 
-*heatmap=TRUE*. This would be usefull to visualize mutliple files in the 
-same plot.
+A heatmap can be used instead of the classic barplot for histograms by 
+specifying *heatmap=TRUE*. 
+This can be useful for visualising mutliple files in the same plot.
 
-```{r heatMap, eval=TRUE, message = FALSE, warning=FALSE,}
+```{r heatMap, eval=TRUE, message = FALSE, warning=FALSE, }
 plotHist(
-    windows = win, groupBy = c("File","OverlapTranscript"), 
+    windows = win, groupBy = c("File", "OverlapTranscript"), 
     normalizeBy = "File", heatmap = TRUE
     )
 ```
 
 
-*plotWin* creates a plot on the number of reads vs positive proportion of each 
-window. There are also 4 lines correspond to 4 representative thresholds 
-(0.6, 0.7, 0.8, 0.9). Threshold is a parameter that is used when filtering a 
-bam file using *filterDNA*. Given a threshold, a positive (resp. negative) 
-window is kept if and only if it is above (resp. below) the corresponding 
-threshold line on this plot. This can be used to give guidance as to the best 
-threshold to choose when filtering windows.
+`plotWin()` creates a plot on the number of reads vs positive proportion for 
+each window. 
+By default, 4 lines correspond to possible filtering thresholds 
+(0.6, 0.7, 0.8, 0.9). 
+Threshold is a parameter that is used when filtering a bam file using 
+`filterDNA()`. 
+Given a threshold, a positive (resp. negative) window is kept if and only if it 
+is above (resp. below) the corresponding threshold line on this plot. 
+This can be used to provide guidance as to the best threshold to choose when 
+filtering bam files.
 
-```{r plotwin,eval=TRUE,message=FALSE,warning=FALSE}
+```{r plotwin, eval=TRUE, message=FALSE, warning=FALSE}
 plotWin(win, groupBy = "File")
 ```
 
 # Filter bam files
 
-The functions *filterDNA* removes potential double strand DNA from a bam file 
-using a given threshold.
+The function `filterDNA()` removes potential double stranded DNA from a bam file 
+using the given threshold.
 
 ```{r filterDNA, eval=TRUE, message=FALSE, warning=FALSE, results=FALSE}
 win2 <- filterDNA(
-    file = files[2], sequences = "10", destination = "s2.filter.bam", 
+    file = files[[2]], sequences = "10", destination = "s2.filter.bam", 
     threshold = 0.7, getWin = TRUE
     )
 ```
 
 
-Other parameters can be specified for more flexible filtering: define the 
-ranges that you want to always keep, the minimum number of reads under which 
-you want to ignore, the *pvalue* threshold for keeping a windows etc. Look at
-the manual page of the function for more options and explanations.
+Other parameters can be specified for more flexible filtering.
+You are able to define the ranges that you want to always keep (i.e. gene loci),
+the minimum number of reads under which you want to ignore a window, the 
+*pvalue* threshold for keeping a windows etc. 
+The manual page of the function provides more options and explanations.
 
-Plotting the windows before and after filering:
+A comparison of the windows before and after filtering is given below.
 
-```{r compare,eval=TRUE,message=FALSE,warning=FALSE}
+```{r compare, eval=TRUE, message=FALSE, warning=FALSE, fig.cap="Distribution of windows based on stranded alignments, before and after removing reads from windows with ambiguous strandedness."}
 win2$File <- basename(as.character(win2$File))
-win2$File <- factor(win2$File,levels = c("s2.sorted.bam","s2.filter.bam"))
-library(ggplot2)
-plotHist(win2,groupBy = "File",normalizeBy = "File",scales = "free_y") +
-    ggtitle("Histogram of positive proportions over all sliding windows before 
-            and after filtering reads coming from double strand DNA")
+win2$File <- factor(win2$File, levels = c("s2.sorted.bam", "s2.filter.bam"))
+plotHist(win2, groupBy = "File", normalizeBy = "File", scales = "free_y")
 ```
