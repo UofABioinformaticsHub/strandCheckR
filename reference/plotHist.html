@@ -33,7 +33,7 @@ data frame coming from getStrandFromBamFile"></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Plot the histogram of positive proportions</h1>
-      <small class="dont-index">Source: <a href="https://github.com/UofABioinformaticsHub/strandCheckR/blob/HEAD/R/plotHist.R" class="external-link"><code>R/plotHist.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/UofABioinformaticsHub/strandCheckR/blob/gh-actions/R/plotHist.R" class="external-link"><code>R/plotHist.R</code></a></small>
       <div class="d-none name"><code>plotHist.Rd</code></div>
     </div>
 
@@ -126,9 +126,9 @@ use barplot. FALSE by default.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">bamfilein</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>,<span class="st">'s1.sorted.bam'</span>,package <span class="op">=</span> <span class="st">'strandCheckR'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">win</span>  <span class="op">&lt;-</span> <span class="fu"><a href="getStrandFromBamFile.html">getStrandFromBamFile</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">bamfilein</span>,sequences<span class="op">=</span><span class="st">'10'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing paired end by checking the first 1e+05 reads of file /home/steviep/R/x86_64-pc-linux-gnu-library/4.4/strandCheckR/extdata/s1.sorted.bam</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing paired end by checking the first 1e+05 reads of file /__w/_temp/Library/strandCheckR/extdata/s1.sorted.bam</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Your bam file is single end</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading file /home/steviep/R/x86_64-pc-linux-gnu-library/4.4/strandCheckR/extdata/s1.sorted.bam</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading file /__w/_temp/Library/strandCheckR/extdata/s1.sorted.bam</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Read sequences 10</span>
 <span class="r-in"><span><span class="fu">plotHist</span><span class="op">(</span><span class="va">win</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plotHist-1.png" alt="" width="700" height="433"></span>
@@ -144,7 +144,7 @@ use barplot. FALSE by default.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
 </div>
 
     </footer></div>

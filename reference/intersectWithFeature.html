@@ -33,7 +33,7 @@ features that overlap with each window"></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Intersect the windows data frame with an annotation data frame</h1>
-      <small class="dont-index">Source: <a href="https://github.com/UofABioinformaticsHub/strandCheckR/blob/HEAD/R/intersectWithFeature.R" class="external-link"><code>R/intersectWithFeature.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/UofABioinformaticsHub/strandCheckR/blob/gh-actions/R/intersectWithFeature.R" class="external-link"><code>R/intersectWithFeature.R</code></a></small>
       <div class="d-none name"><code>intersectWithFeature.Rd</code></div>
     </div>
 
@@ -113,9 +113,9 @@ collapse them.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">bamfilein</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata'</span>,<span class="st">'s2.sorted.bam'</span>,package <span class="op">=</span> <span class="st">'strandCheckR'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">windows</span> <span class="op">&lt;-</span> <span class="fu"><a href="getStrandFromBamFile.html">getStrandFromBamFile</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">bamfilein</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing paired end by checking the first 1e+05 reads of file /home/steviep/R/x86_64-pc-linux-gnu-library/4.4/strandCheckR/extdata/s2.sorted.bam</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Testing paired end by checking the first 1e+05 reads of file /__w/_temp/Library/strandCheckR/extdata/s2.sorted.bam</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Your bam file is single end</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading file /home/steviep/R/x86_64-pc-linux-gnu-library/4.4/strandCheckR/extdata/s2.sorted.bam</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading file /__w/_temp/Library/strandCheckR/extdata/s2.sorted.bam</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Read sequences 10</span>
 <span class="r-in"><span><span class="co">#add chr before chromosome names to be consistent with the annotation</span></span></span>
 <span class="r-in"><span><span class="va">windows</span><span class="op">$</span><span class="va">Seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">'chr'</span>,<span class="va">windows</span><span class="op">$</span><span class="va">Seq</span><span class="op">)</span></span></span>
@@ -152,7 +152,7 @@ collapse them.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
 </div>
 
     </footer></div>
