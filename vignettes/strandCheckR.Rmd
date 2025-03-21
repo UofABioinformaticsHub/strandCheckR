@@ -189,7 +189,7 @@ ranges that you want to always keep, the minimum number of reads under which
 you want to ignore, the *pvalue* threshold for keeping a windows etc. Look at
 the manual page of the function for more options and explanations.
 
-Plotting the windows before and after filering:
+Plotting the windows before and after filtering:
 
 ```{r compare,eval=TRUE,message=FALSE,warning=FALSE}
 win2$File <- basename(as.character(win2$File))
@@ -199,3 +199,16 @@ plotHist(win2, groupBy = "File", normalizeBy = "File", scales = "free_y") +
     ggtitle("Histogram of positive proportions over all sliding windows before 
             and after filtering reads coming from double strand DNA")
 ```
+
+```{r remove-bams, echo = FALSE}
+if (file.exists("s2.filter.bam")) unlink("s2.filter.bam")
+if (file.exists("s2.filter.bam.bai")) unlink("s2.filter.bam.bai")
+```
+
+
+# Session Info
+
+```{r}
+sessionInfo()
+```
+
