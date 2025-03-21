@@ -3,7 +3,7 @@ pkgdown: 2.1.1.9000
 pkgdown_sha: 66477c0dbb4f4925ec872cf64d5eaa316cc70bac
 articles:
   strandCheckR: strandCheckR.html
-last_built: 2025-03-21T14:41Z
+last_built: 2025-03-21T15:06Z
 urls:
   reference: https://UofABioinformaticsHub.github.io/strandCheckR/reference
   article: https://UofABioinformaticsHub.github.io/strandCheckR/articles
