@@ -1,0 +1,9 @@
+pandoc: '3.2'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  strandCheckR: strandCheckR.html
+last_built: 2025-03-21T14:14Z
+urls:
+  reference: https://UofABioinformaticsHub.github.io/strandCheckR/reference
+  article: https://UofABioinformaticsHub.github.io/strandCheckR/articles
