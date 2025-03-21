@@ -126,13 +126,13 @@ plotWin <- function(
     nbSampling <- 1000
     x <- floor(seq(1, sqrt(maxReads), length.out = nbSampling)^2)
     for (t in threshold) {
-        tP = log(t/(1 - t))
+        tP <- log(t/(1 - t))
         positiveReadsT <- vapply(
             x, function(N) {
-                p = seq(round(N * t), N, 1)  # Number of positive reads
-                pP = p/N  # Prop of positive reads
-                mP = log(pP/(1 - pP))  # Mean prop-pos-reads (logit scale)
-                sdP = sqrt(1/(N * pP * (1 - pP)))  # SD prop-pos-reads
+                p <- seq(round(N * t), N, 1)  # Number of positive reads
+                pP <- p/N  # Prop of positive reads
+                mP <- log(pP/(1 - pP))  # Mean prop-pos-reads (logit scale)
+                sdP <- sqrt(1/(N * pP * (1 - pP)))  # SD prop-pos-reads
                 # pBinom <- pbinom(t*N,size = N, prob = pP)
                 pNorm <- pnorm(tP, mean = mP, sd = sdP)
                 aNorm <- which(pNorm <= 0.05)[1]
