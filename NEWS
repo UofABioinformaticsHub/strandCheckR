@@ -1,0 +1,9 @@
+#Changes in version 1.1.2
++ Update README with usage example & remove dependency installation.
++ Change function name `getWinFromBamFile` to `getStrandFromBamFile`.
++ Change name, export and add examples for functions `getWinOverlapEachIRange`, `getWinOverlapGRanges`, `getStrandFromReadInfo` and `getWinOverlapEachReadFragment`.
++ Add license file.
+#Changes in version 1.1.1
++ Add ImmunoOncology to biocViews.
+#Version 0.99.16 
++ Submitted version to Bioconductor.

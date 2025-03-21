@@ -1,0 +1,39 @@
+template:
+  bootstrap: 5
+  bootswatch: simplex
+
+url: https://UofABioinformaticsHub.github.io/strandCheckR/
+
+authors:
+  Thu-Hien To:
+    href: https://github.com/tothuhien
+  Stevie Pederson:
+    href: https://github.com/smped
+
+reference:
+
+- title: Check Stranded Alignments
+  contents:
+    - starts_with("get")
+    - starts_with("plot")
+    - checkPairedEnd
+    - filterDNA
+    - intersectWithFeature
+    - contains("strand")
+
+
+navbar:
+  type: default
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Vignettes
+    menu:
+    - text: An Introduction To strandCheckR
+      href: articles/strandCheckR.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/UofABioinformaticsHub/strandCheckR
+    aria-label: View on github

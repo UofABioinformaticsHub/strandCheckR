@@ -1,0 +1,10 @@
+^path$
+^.*\.Rproj$
+^\.Rproj\.user$
+^TODO.md$
+^\.gitignore$
+^\.travis\.yml$
+^LICENSE$
+^README\.Rmd$
+^README_files$
+^paper$

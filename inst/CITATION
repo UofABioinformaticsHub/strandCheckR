@@ -1,0 +1,15 @@
+bibentry(
+    bibtype = "Article",
+    header = "To cite strandCheckR in publications, please use:",
+    title = "{strandCheckR}: An {R} package for quantifying and removing double strand sequences for strand-specific {RNA}-seq",
+    journal   = "J. Open Source Softw.",
+    author = c(
+         person("Thu-Hien", "To"),
+         person("Stephen", "Pederson")
+    ),
+    month = 2,
+    year = 2019,
+    doi = "10.21105/joss.01145"
+)
+
+
