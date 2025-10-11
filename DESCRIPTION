@@ -1,7 +1,7 @@
 Package: strandCheckR
 Type: Package
 Title: Calculate strandness information of a bam file
-Version: 1.25.1
+Version: 1.27.1
 Authors@R: c(
     person("Thu-Hien", "To", email = "tothuhien@gmail.com", role = c("aut", "cre")),
     person(
@@ -18,13 +18,13 @@ License: GPL (>= 2)
 LazyData: TRUE
 Encoding: UTF-8
 Depends:
-  ggplot2 (>= 3.5.0),
+  ggplot2 (>= 4.0.0),
   Rsamtools,
   S4Vectors
 Imports:
   BiocGenerics,
   dplyr,
-  GenomeInfoDb,
+  Seqinfo,
   GenomicAlignments,
   GenomicRanges,
   gridExtra,
@@ -38,7 +38,7 @@ Imports:
   TxDb.Hsapiens.UCSC.hg38.knownGene,
   tidyselect
 biocViews: RNASeq, Alignment, QualityControl, Coverage, ImmunoOncology
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Suggests: 
   BiocStyle, 

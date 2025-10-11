@@ -7,7 +7,7 @@
 filterDNA(
   file,
   destination,
-  statFile,
+  statFile = "out.stat",
   sequences,
   mapqFilter = 0,
   paired,
@@ -125,7 +125,9 @@ all windows that contain it.
 }
 \examples{
 file <- system.file('extdata','s2.sorted.bam',package = 'strandCheckR')
-filterDNA(file,sequences='10',destination='out.bam')
+out_bam <- tempfile(fileext = ".bam")
+out_log <- tempfile(fileext = ".log")
+filterDNA(file, sequences = '10', destination = out_bam, statFile = out_log)
 
 }
 \seealso{

@@ -13,8 +13,8 @@ getStrandFromReadInfo(
 )
 }
 \arguments{
-\item{readInfo}{a list contains read information returned by
-\code{\link{scanBam}} function when read a bam file.}
+\item{readInfo}{a list containing read information returned by
+[Rsamtools::scanBam()].}
 
 \item{winWidth}{the length of the sliding window, 1000 by default.}
 
@@ -32,7 +32,7 @@ and coverage of each window sliding .
 }
 \description{
 Get the number of positive/negative reads of all windows from
-read information obtained from \code{\link{scanBam}} function
+read information obtained from [Rsamtools::scanBam()]
 }
 \examples{
 library(Rsamtools)

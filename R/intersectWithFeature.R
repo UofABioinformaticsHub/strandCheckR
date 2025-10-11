@@ -44,7 +44,7 @@
 #' plotWin(windows,facets = 'OverlapTranscript')
 #'
 #' @importFrom IRanges IRanges
-#' @importFrom GenomeInfoDb seqlevels
+#' @importFrom Seqinfo seqlevels
 #' @importFrom GenomicRanges GRanges mcols findOverlaps
 #' @importFrom S4Vectors from to
 #' @import TxDb.Hsapiens.UCSC.hg38.knownGene

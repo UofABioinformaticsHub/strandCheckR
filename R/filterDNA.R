@@ -85,7 +85,7 @@
 #' filterDNA(file, sequences = '10', destination = out_bam, statFile = out_log)
 #'
 #' @importFrom GenomicRanges GRanges ranges
-#' @importFrom GenomeInfoDb seqinfo seqnames seqlengths
+#' @importFrom Seqinfo seqinfo seqnames seqlengths
 #' @importFrom IRanges IRanges
 #' @importFrom methods is
 #' @importFrom Rsamtools filterBam

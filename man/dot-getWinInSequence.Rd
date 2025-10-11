@@ -9,12 +9,15 @@
 \arguments{
 \item{Win}{a data frame contains the strand information of every window}
 
-\item{seqInfo}{a data frame that contains some key information of the 
+\item{seqInfo}{a data frame that contains some key information of the
 sequences}
 
 \item{winWidth}{the length of sliding window}
 
 \item{winStep}{the step length to sliding the window}
+}
+\value{
+A subset of the input object
 }
 \description{
 Get the correct sequence name and position for each window

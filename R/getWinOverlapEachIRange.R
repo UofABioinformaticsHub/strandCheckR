@@ -7,7 +7,7 @@
 #' @details
 #' This finds the windows that overlap each range of the input IRanges object.
 #' Each range corresponds to a read fragment. This allows the total number of
-#' read fragments within a window to be calculated simply using \link{coverage}.
+#' read fragments within a window to be calculated simply using [IRanges::coverage()].
 #'
 #' @param x an IRanges object containing the start and end position of
 #' each read fragment.
@@ -19,6 +19,7 @@
 #'
 #' @return An IRanges object containing the index of the windows overlapping
 #' each read fragment
+#'
 #' @examples
 #' library(IRanges)
 #' x <- IRanges(start=round(runif(100,1000,10000)),width=100)

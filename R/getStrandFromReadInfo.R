@@ -1,14 +1,17 @@
 #' @title Get the strand information of all windows from read information
+#'
 #' @description Get the number of positive/negative reads of all windows from
-#' read information obtained from \code{\link{scanBam}} function
-#' @param readInfo a list contains read information returned by
-#' \code{\link{scanBam}} function when read a bam file.
+#' read information obtained from [Rsamtools::scanBam()]
+#'
+#' @param readInfo a list containing read information returned by
+#' [Rsamtools::scanBam()].
 #' @param winWidth the length of the sliding window, 1000 by default.
 #' @param winStep the step length to sliding the window, 100 by default.
 #' @param readProp A read is considered to be included in a window if at least
 #' \code{readProp} of it is in the window. Specified as a proportion.
 #' 0.5 by default.
 #' @param subset an integer vector specifying the subset of reads to consider
+#'
 #' @return a DataFrame object containing the number of positive/negative reads
 #' and coverage of each window sliding .
 #'

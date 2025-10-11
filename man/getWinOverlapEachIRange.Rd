@@ -37,7 +37,7 @@ IRanges object.
 \details{
 This finds the windows that overlap each range of the input IRanges object.
 Each range corresponds to a read fragment. This allows the total number of
-read fragments within a window to be calculated simply using \link{coverage}.
+read fragments within a window to be calculated simply using [IRanges::coverage()].
 }
 \examples{
 library(IRanges)

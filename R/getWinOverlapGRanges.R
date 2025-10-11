@@ -38,7 +38,7 @@
 #' @importFrom GenomicRanges start<- end<- ranges<- ranges
 #' @importFrom IRanges start end coverage
 #' @importFrom BiocGenerics strand
-#' @importFrom GenomeInfoDb seqlevels
+#' @importFrom Seqinfo seqlevels
 #' @export
 getWinOverlapGRanges <- function(
     x, seqInfo, winWidth = 1000L, winStep = 100L, nbOverlapBases = 1

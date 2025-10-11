@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 strandCheckR.Rproj
+vignettes/*R
+vignettes/*html
+vignettes/*stat

@@ -64,7 +64,7 @@
 #' \code{\link{plotWin}}
 #' @export
 #' @importFrom IRanges Views
-#' @importFrom GenomeInfoDb seqinfo
+#' @importFrom Seqinfo seqinfo
 #' @importFrom Rsamtools bamMapqFilter<- bamMapqFilter ScanBamParam BamFileList
 #' @importFrom S4Vectors DataFrame
 #' @importFrom methods is

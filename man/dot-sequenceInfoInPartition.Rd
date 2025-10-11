@@ -8,12 +8,15 @@ of the partition.}
 .sequenceInfoInPartition(seqInfo, winWidth, winStep)
 }
 \arguments{
-\item{seqInfo}{a data frame that contains some key information of the 
+\item{seqInfo}{a data frame that contains some key information of the
 sequences}
 
 \item{winWidth}{the length of sliding window}
 
 \item{winStep}{the step length to sliding the window}
+}
+\value{
+Reduced sequence information (data.frame)
 }
 \description{
 Calculate the first/last base/read of each sequence within each part
